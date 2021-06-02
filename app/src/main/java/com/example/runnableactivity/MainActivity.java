@@ -7,8 +7,22 @@ import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG2 = "Thread2";
+    private static final String TAG ="Thread" ;
     Thread wr;
     boolean running = true;
+
+    class WorkerThread extends Thread {
+        public void run() {
+            int i = 0;
+            for (i = 0; i < 20 && running; i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                }
+                Log.v(TAG, "Thread time=" + i);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                     }
+                    Log.v(TAG,"Thread time=\" + i");
                     Log.v(TAG2,"Runnable time=" +i);
+
                 }
             }
         });
